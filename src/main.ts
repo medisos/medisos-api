@@ -6,12 +6,18 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   const config = new DocumentBuilder()
-    .setTitle('Dorsal')
-    .setDescription('Backbone for everything')
+    .setTitle('Medisos')
+    .setDescription('Medisos API')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document,
+    {
+      swaggerOptions: {
+        persistAuthorization: true,
+      },
+      customSiteTitle: "Medisos API"
+    });
   
   await app.listen(3000);
 }
